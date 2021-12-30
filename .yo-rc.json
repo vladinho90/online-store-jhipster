@@ -39,7 +39,7 @@
     "devServerPort": 4200,
     "clientPackageManager": "npm",
     "clientThemeVariant": "",
-    "languages": ["en", "zh-cn"],
+    "languages": ["en", "zh-cn", "ro"],
     "enableGradleEnterprise": false,
     "entities": ["Product", "ProductCategory", "Customer", "ProductOrder", "OrderItem", "Invoice", "Shipment"],
     "lastLiquibaseTimestamp": 1640774889000
