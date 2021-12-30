@@ -31,6 +31,11 @@
       "fieldName": "paymentAmount",
       "fieldType": "BigDecimal",
       "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
     }
   ],
   "relationships": [
@@ -44,7 +49,9 @@
       "relationshipType": "many-to-one",
       "otherEntityName": "productOrder",
       "otherEntityRelationshipName": "invoice",
-      "relationshipName": "order"
+      "relationshipValidateRules": "required",
+      "relationshipName": "order",
+      "otherEntityField": "code"
     }
   ],
   "entityTableName": "invoice",

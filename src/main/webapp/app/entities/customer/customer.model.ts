@@ -13,7 +13,7 @@ export interface ICustomer {
   addressLine2?: string | null;
   city?: string;
   country?: string;
-  user?: IUser | null;
+  user?: IUser;
   orders?: IProductOrder[] | null;
 }
 
@@ -29,7 +29,7 @@ export class Customer implements ICustomer {
     public addressLine2?: string | null,
     public city?: string,
     public country?: string,
-    public user?: IUser | null,
+    public user?: IUser,
     public orders?: IProductOrder[] | null
   ) {}
 }

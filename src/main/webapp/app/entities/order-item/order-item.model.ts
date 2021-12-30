@@ -7,8 +7,8 @@ export interface IOrderItem {
   quantity?: number;
   totalPrice?: number;
   status?: OrderItemStatus;
-  product?: IProduct | null;
-  order?: IProductOrder | null;
+  product?: IProduct;
+  order?: IProductOrder;
 }
 
 export class OrderItem implements IOrderItem {
@@ -17,8 +17,8 @@ export class OrderItem implements IOrderItem {
     public quantity?: number,
     public totalPrice?: number,
     public status?: OrderItemStatus,
-    public product?: IProduct | null,
-    public order?: IProductOrder | null
+    public product?: IProduct,
+    public order?: IProductOrder
   ) {}
 }
 

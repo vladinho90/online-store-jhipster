@@ -76,14 +76,23 @@
         <div class="form-group">
           <label class="form-control-label" jhiTranslate="storeApp.productOrder.customer" for="field_customer">Customer</label>
           <select class="form-control" id="field_customer" data-cy="customer" name="customer" formControlName="customer">
-            <option [ngValue]="null"></option>
+            <option *ngIf="!editForm.get('customer')!.value" [ngValue]="null" selected></option>
             <option
               [ngValue]="customerOption.id === editForm.get('customer')!.value?.id ? editForm.get('customer')!.value : customerOption"
               *ngFor="let customerOption of customersSharedCollection; trackBy: trackCustomerById"
             >
-              {{ customerOption.id }}
+              {{ customerOption.email }}
             </option>
           </select>
+        </div>
+        <div *ngIf="editForm.get(['customer'])!.invalid && (editForm.get(['customer'])!.dirty || editForm.get(['customer'])!.touched)">
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['customer'])?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
         </div>
       </div>
 

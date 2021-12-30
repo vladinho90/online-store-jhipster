@@ -53,7 +53,9 @@
       "relationshipType": "one-to-one",
       "otherEntityName": "user",
       "otherEntityRelationshipName": "customer",
+      "relationshipValidateRules": "required",
       "relationshipName": "user",
+      "otherEntityField": "login",
       "ownerSide": true
     },
     {

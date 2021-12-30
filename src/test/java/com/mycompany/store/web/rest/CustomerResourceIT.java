@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.mycompany.store.IntegrationTest;
 import com.mycompany.store.domain.Customer;
+import com.mycompany.store.domain.User;
 import com.mycompany.store.domain.enumeration.Gender;
 import com.mycompany.store.repository.CustomerRepository;
 import java.util.List;
@@ -91,6 +92,11 @@ class CustomerResourceIT {
             .addressLine2(DEFAULT_ADDRESS_LINE_2)
             .city(DEFAULT_CITY)
             .country(DEFAULT_COUNTRY);
+        // Add required entity
+        User user = UserResourceIT.createEntity(em);
+        em.persist(user);
+        em.flush();
+        customer.setUser(user);
         return customer;
     }
 
@@ -111,6 +117,11 @@ class CustomerResourceIT {
             .addressLine2(UPDATED_ADDRESS_LINE_2)
             .city(UPDATED_CITY)
             .country(UPDATED_COUNTRY);
+        // Add required entity
+        User user = UserResourceIT.createEntity(em);
+        em.persist(user);
+        em.flush();
+        customer.setUser(user);
         return customer;
     }
 

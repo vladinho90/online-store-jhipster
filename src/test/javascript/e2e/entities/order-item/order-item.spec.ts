@@ -1,7 +1,11 @@
-import { browser, ExpectedConditions as ec, promise } from 'protractor';
+import { browser, ExpectedConditions as ec /* , promise */ } from 'protractor';
 import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
-import { OrderItemComponentsPage, OrderItemDeleteDialog, OrderItemUpdatePage } from './order-item.page-object';
+import {
+  OrderItemComponentsPage,
+  /* OrderItemDeleteDialog, */
+  OrderItemUpdatePage,
+} from './order-item.page-object';
 
 const expect = chai.expect;
 
@@ -10,7 +14,7 @@ describe('OrderItem e2e test', () => {
   let signInPage: SignInPage;
   let orderItemComponentsPage: OrderItemComponentsPage;
   let orderItemUpdatePage: OrderItemUpdatePage;
-  let orderItemDeleteDialog: OrderItemDeleteDialog;
+  /* let orderItemDeleteDialog: OrderItemDeleteDialog; */
   const username = process.env.E2E_USERNAME ?? 'admin';
   const password = process.env.E2E_PASSWORD ?? 'admin';
 
@@ -37,36 +41,37 @@ describe('OrderItem e2e test', () => {
     await orderItemUpdatePage.cancel();
   });
 
-  it('should create and save OrderItems', async () => {
-    const nbButtonsBeforeCreate = await orderItemComponentsPage.countDeleteButtons();
+  /* it('should create and save OrderItems', async () => {
+        const nbButtonsBeforeCreate = await orderItemComponentsPage.countDeleteButtons();
 
-    await orderItemComponentsPage.clickOnCreateButton();
+        await orderItemComponentsPage.clickOnCreateButton();
 
-    await promise.all([
-      orderItemUpdatePage.setQuantityInput('5'),
-      orderItemUpdatePage.setTotalPriceInput('5'),
-      orderItemUpdatePage.statusSelectLastOption(),
-      orderItemUpdatePage.productSelectLastOption(),
-      orderItemUpdatePage.orderSelectLastOption(),
-    ]);
+        await promise.all([
+            orderItemUpdatePage.setQuantityInput('5'),
+            orderItemUpdatePage.setTotalPriceInput('5'),
+            orderItemUpdatePage.statusSelectLastOption(),
+            orderItemUpdatePage.productSelectLastOption(),
+            orderItemUpdatePage.orderSelectLastOption(),
+        ]);
 
-    await orderItemUpdatePage.save();
-    expect(await orderItemUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
+        await orderItemUpdatePage.save();
+        expect(await orderItemUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 
-    expect(await orderItemComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1, 'Expected one more entry in the table');
-  });
+        expect(await orderItemComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1, 'Expected one more entry in the table');
+    }); */
 
-  it('should delete last OrderItem', async () => {
-    const nbButtonsBeforeDelete = await orderItemComponentsPage.countDeleteButtons();
-    await orderItemComponentsPage.clickOnLastDeleteButton();
+  /* it('should delete last OrderItem', async () => {
+        const nbButtonsBeforeDelete = await orderItemComponentsPage.countDeleteButtons();
+        await orderItemComponentsPage.clickOnLastDeleteButton();
 
-    orderItemDeleteDialog = new OrderItemDeleteDialog();
-    expect(await orderItemDeleteDialog.getDialogTitle()).to.eq('storeApp.orderItem.delete.question');
-    await orderItemDeleteDialog.clickOnConfirmButton();
-    await browser.wait(ec.visibilityOf(orderItemComponentsPage.title), 5000);
+        orderItemDeleteDialog = new OrderItemDeleteDialog();
+        expect(await orderItemDeleteDialog.getDialogTitle())
+            .to.eq('storeApp.orderItem.delete.question');
+        await orderItemDeleteDialog.clickOnConfirmButton();
+        await browser.wait(ec.visibilityOf(orderItemComponentsPage.title), 5000);
 
-    expect(await orderItemComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
-  });
+        expect(await orderItemComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
+    }); */
 
   after(async () => {
     await navBarPage.autoSignOut();

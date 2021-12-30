@@ -8,6 +8,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.mycompany.store.IntegrationTest;
 import com.mycompany.store.domain.OrderItem;
+import com.mycompany.store.domain.Product;
+import com.mycompany.store.domain.ProductOrder;
 import com.mycompany.store.domain.enumeration.OrderItemStatus;
 import com.mycompany.store.repository.OrderItemRepository;
 import java.math.BigDecimal;
@@ -66,6 +68,26 @@ class OrderItemResourceIT {
      */
     public static OrderItem createEntity(EntityManager em) {
         OrderItem orderItem = new OrderItem().quantity(DEFAULT_QUANTITY).totalPrice(DEFAULT_TOTAL_PRICE).status(DEFAULT_STATUS);
+        // Add required entity
+        Product product;
+        if (TestUtil.findAll(em, Product.class).isEmpty()) {
+            product = ProductResourceIT.createEntity(em);
+            em.persist(product);
+            em.flush();
+        } else {
+            product = TestUtil.findAll(em, Product.class).get(0);
+        }
+        orderItem.setProduct(product);
+        // Add required entity
+        ProductOrder productOrder;
+        if (TestUtil.findAll(em, ProductOrder.class).isEmpty()) {
+            productOrder = ProductOrderResourceIT.createEntity(em);
+            em.persist(productOrder);
+            em.flush();
+        } else {
+            productOrder = TestUtil.findAll(em, ProductOrder.class).get(0);
+        }
+        orderItem.setOrder(productOrder);
         return orderItem;
     }
 
@@ -77,6 +99,26 @@ class OrderItemResourceIT {
      */
     public static OrderItem createUpdatedEntity(EntityManager em) {
         OrderItem orderItem = new OrderItem().quantity(UPDATED_QUANTITY).totalPrice(UPDATED_TOTAL_PRICE).status(UPDATED_STATUS);
+        // Add required entity
+        Product product;
+        if (TestUtil.findAll(em, Product.class).isEmpty()) {
+            product = ProductResourceIT.createUpdatedEntity(em);
+            em.persist(product);
+            em.flush();
+        } else {
+            product = TestUtil.findAll(em, Product.class).get(0);
+        }
+        orderItem.setProduct(product);
+        // Add required entity
+        ProductOrder productOrder;
+        if (TestUtil.findAll(em, ProductOrder.class).isEmpty()) {
+            productOrder = ProductOrderResourceIT.createUpdatedEntity(em);
+            em.persist(productOrder);
+            em.flush();
+        } else {
+            productOrder = TestUtil.findAll(em, ProductOrder.class).get(0);
+        }
+        orderItem.setOrder(productOrder);
         return orderItem;
     }
 

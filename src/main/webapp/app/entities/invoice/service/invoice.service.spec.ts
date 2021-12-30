@@ -33,6 +33,7 @@ describe('Invoice Service', () => {
       paymentMethod: PaymentMethod.CREDIT_CARD,
       paymentDate: currentDate,
       paymentAmount: 0,
+      code: 'AAAAAAA',
     };
   });
 
@@ -88,6 +89,7 @@ describe('Invoice Service', () => {
           paymentMethod: 'BBBBBB',
           paymentDate: currentDate.format(DATE_TIME_FORMAT),
           paymentAmount: 1,
+          code: 'BBBBBB',
         },
         elemDefault
       );
@@ -145,6 +147,7 @@ describe('Invoice Service', () => {
           paymentMethod: 'BBBBBB',
           paymentDate: currentDate.format(DATE_TIME_FORMAT),
           paymentAmount: 1,
+          code: 'BBBBBB',
         },
         elemDefault
       );
@@ -202,7 +205,7 @@ describe('Invoice Service', () => {
       });
 
       it('should add only unique Invoice to an array', () => {
-        const invoiceArray: IInvoice[] = [{ id: 123 }, { id: 456 }, { id: 10416 }];
+        const invoiceArray: IInvoice[] = [{ id: 123 }, { id: 456 }, { id: 61298 }];
         const invoiceCollection: IInvoice[] = [{ id: 123 }];
         expectedResult = service.addInvoiceToCollectionIfMissing(invoiceCollection, ...invoiceArray);
         expect(expectedResult).toHaveLength(3);

@@ -6,6 +6,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.mycompany.store.IntegrationTest;
+import com.mycompany.store.domain.Invoice;
 import com.mycompany.store.domain.Shipment;
 import com.mycompany.store.repository.ShipmentRepository;
 import java.time.Instant;
@@ -65,6 +66,16 @@ class ShipmentResourceIT {
      */
     public static Shipment createEntity(EntityManager em) {
         Shipment shipment = new Shipment().trackingCode(DEFAULT_TRACKING_CODE).date(DEFAULT_DATE).details(DEFAULT_DETAILS);
+        // Add required entity
+        Invoice invoice;
+        if (TestUtil.findAll(em, Invoice.class).isEmpty()) {
+            invoice = InvoiceResourceIT.createEntity(em);
+            em.persist(invoice);
+            em.flush();
+        } else {
+            invoice = TestUtil.findAll(em, Invoice.class).get(0);
+        }
+        shipment.setInvoice(invoice);
         return shipment;
     }
 
@@ -76,6 +87,16 @@ class ShipmentResourceIT {
      */
     public static Shipment createUpdatedEntity(EntityManager em) {
         Shipment shipment = new Shipment().trackingCode(UPDATED_TRACKING_CODE).date(UPDATED_DATE).details(UPDATED_DETAILS);
+        // Add required entity
+        Invoice invoice;
+        if (TestUtil.findAll(em, Invoice.class).isEmpty()) {
+            invoice = InvoiceResourceIT.createUpdatedEntity(em);
+            em.persist(invoice);
+            em.flush();
+        } else {
+            invoice = TestUtil.findAll(em, Invoice.class).get(0);
+        }
+        shipment.setInvoice(invoice);
         return shipment;
     }
 

@@ -47,7 +47,10 @@
           <th scope="col" jhiSortBy="paymentAmount">
             <span jhiTranslate="storeApp.invoice.paymentAmount">Payment Amount</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="order.id"><span jhiTranslate="storeApp.invoice.order">Order</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="code"><span jhiTranslate="storeApp.invoice.code">Code</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="order.code">
+            <span jhiTranslate="storeApp.invoice.order">Order</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -62,9 +65,10 @@
           <td jhiTranslate="{{ 'storeApp.PaymentMethod.' + invoice.paymentMethod }}">{{ invoice.paymentMethod }}</td>
           <td>{{ invoice.paymentDate | formatMediumDatetime }}</td>
           <td>{{ invoice.paymentAmount }}</td>
+          <td>{{ invoice.code }}</td>
           <td>
             <div *ngIf="invoice.order">
-              <a [routerLink]="['/product-order', invoice.order?.id, 'view']">{{ invoice.order?.id }}</a>
+              <a [routerLink]="['/product-order', invoice.order?.id, 'view']">{{ invoice.order?.code }}</a>
             </div>
           </td>
           <td class="text-right">

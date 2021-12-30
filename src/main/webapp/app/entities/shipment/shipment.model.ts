@@ -6,7 +6,7 @@ export interface IShipment {
   trackingCode?: string | null;
   date?: dayjs.Dayjs;
   details?: string | null;
-  invoice?: IInvoice | null;
+  invoice?: IInvoice;
 }
 
 export class Shipment implements IShipment {
@@ -15,7 +15,7 @@ export class Shipment implements IShipment {
     public trackingCode?: string | null,
     public date?: dayjs.Dayjs,
     public details?: string | null,
-    public invoice?: IInvoice | null
+    public invoice?: IInvoice
   ) {}
 }
 

@@ -24,6 +24,7 @@
       "paymentMethod": "Payment Method",
       "paymentDate": "Payment Date",
       "paymentAmount": "Payment Amount",
+      "code": "Code",
       "shipment": "Shipment",
       "order": "Order"
     }

@@ -11,7 +11,7 @@ export interface IProductOrder {
   code?: string;
   orderItems?: IOrderItem[] | null;
   invoices?: IInvoice[] | null;
-  customer?: ICustomer | null;
+  customer?: ICustomer;
 }
 
 export class ProductOrder implements IProductOrder {
@@ -22,7 +22,7 @@ export class ProductOrder implements IProductOrder {
     public code?: string,
     public orderItems?: IOrderItem[] | null,
     public invoices?: IInvoice[] | null,
-    public customer?: ICustomer | null
+    public customer?: ICustomer
   ) {}
 }
 

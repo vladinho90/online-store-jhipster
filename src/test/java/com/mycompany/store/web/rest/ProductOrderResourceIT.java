@@ -6,6 +6,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.mycompany.store.IntegrationTest;
+import com.mycompany.store.domain.Customer;
 import com.mycompany.store.domain.ProductOrder;
 import com.mycompany.store.domain.enumeration.OrderStatus;
 import com.mycompany.store.repository.ProductOrderRepository;
@@ -66,6 +67,16 @@ class ProductOrderResourceIT {
      */
     public static ProductOrder createEntity(EntityManager em) {
         ProductOrder productOrder = new ProductOrder().placedDate(DEFAULT_PLACED_DATE).status(DEFAULT_STATUS).code(DEFAULT_CODE);
+        // Add required entity
+        Customer customer;
+        if (TestUtil.findAll(em, Customer.class).isEmpty()) {
+            customer = CustomerResourceIT.createEntity(em);
+            em.persist(customer);
+            em.flush();
+        } else {
+            customer = TestUtil.findAll(em, Customer.class).get(0);
+        }
+        productOrder.setCustomer(customer);
         return productOrder;
     }
 
@@ -77,6 +88,16 @@ class ProductOrderResourceIT {
      */
     public static ProductOrder createUpdatedEntity(EntityManager em) {
         ProductOrder productOrder = new ProductOrder().placedDate(UPDATED_PLACED_DATE).status(UPDATED_STATUS).code(UPDATED_CODE);
+        // Add required entity
+        Customer customer;
+        if (TestUtil.findAll(em, Customer.class).isEmpty()) {
+            customer = CustomerResourceIT.createUpdatedEntity(em);
+            em.persist(customer);
+            em.flush();
+        } else {
+            customer = TestUtil.findAll(em, Customer.class).get(0);
+        }
+        productOrder.setCustomer(customer);
         return productOrder;
     }
 

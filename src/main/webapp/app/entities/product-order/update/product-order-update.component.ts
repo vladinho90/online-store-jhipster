@@ -29,7 +29,7 @@ export class ProductOrderUpdateComponent implements OnInit {
     placedDate: [null, [Validators.required]],
     status: [null, [Validators.required]],
     code: [null, [Validators.required]],
-    customer: [],
+    customer: [null, Validators.required],
   });
 
   constructor(
