@@ -29,7 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @IntegrationTest
 @AutoConfigureMockMvc
-@WithMockUser
+@WithMockUser(username = "admin", authorities = { "ROLE_ADMIN" }, password = "admin")
 class ShipmentResourceIT {
 
     private static final String DEFAULT_TRACKING_CODE = "AAAAAAAAAA";
